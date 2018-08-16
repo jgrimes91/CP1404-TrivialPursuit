@@ -10,7 +10,7 @@ def main():
 
 def ask_question(question, answers):
     """Display questions to the user"""
-    print("{}?\nA) {}\nB) {}\nC)".format(question, answers[0], answers[1], answers[2]))
+    print("{}?\nA) {}\nB) {}\nC) {}".format(question, answers[0], answers[1], answers[2]))
     user_answer = ""
     while user_answer != "A" and user_answer != "B" and user_answer != "C":
         user_answer = input(">>> ")
