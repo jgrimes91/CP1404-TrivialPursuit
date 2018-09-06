@@ -1,4 +1,4 @@
-from random import shuffle
+from Question import Question
 from random import choice
 
 
@@ -69,42 +69,11 @@ def play_game(questions):
     points = 0
     while points < 10:
         category = get_random_category()
-        question = get_question(category, questions)
-        shuffled_options = get_shuffled_options(question)
-        user_answer = ask_question(question, shuffled_options)
-        points += is_correct_answer(question[1], user_answer)
+        # question = get_question(category, questions)
+        # shuffled_options = get_shuffled_options(question)
+        # user_answer = ask_question(question, shuffled_options)
+        # points += is_correct_answer(question[1], user_answer)
 
-
-def is_correct_answer(answer, user_answer):
-    if user_answer != answer:
-        print("Incorrect")
-        return 0
-    else:
-        print("Correct")
-        return 1
-
-
-def ask_question(question, answers):
-    print("{}?\nA){}\nB){}\nC){}".format(question[0], answers[0], answers[1], answers[2]))
-    user_answer = ""
-    while user_answer != "A" and user_answer != "B" and user_answer != "C":
-        user_answer = input(">>>>")
-        user_answer = user_answer.upper()
-
-    if user_answer == "A":
-        return answers[0]
-    if user_answer == "B":
-        return answers[1]
-    else:
-        return answers[2]
-
-
-def get_shuffled_options(question_row):
-    options = []
-    for i in range(1, 4):
-        options.append(question_row[i])
-    shuffle(options)
-    return options
 
 
 def load_questions():
@@ -112,7 +81,7 @@ def load_questions():
     question_file = open("Questions", "r")
     for line in question_file:
         question = line.strip("\n").split(",")
-        questions.append(question)
+        questions.append(Question(question[0], question[1], question[2], question[3], question[4]))
     question_file.close()
 
     return questions
