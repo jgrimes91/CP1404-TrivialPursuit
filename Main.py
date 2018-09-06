@@ -69,7 +69,9 @@ def play_game(questions):
     points = 0
     while points < 10:
         category = get_random_category()
-        # question = get_question(category, questions)
+        question = get_question(category, questions)
+        question.ask_question()
+        
         # shuffled_options = get_shuffled_options(question)
         # user_answer = ask_question(question, shuffled_options)
         # points += is_correct_answer(question[1], user_answer)
@@ -98,7 +100,7 @@ def get_random_category():
 def get_question(category, questions):
     category_questions = []
     for question in questions:
-        if category == question[4]:
+        if category == question.category:
             category_questions.append(question)
     chosen_question = choice(category_questions)
     return chosen_question
