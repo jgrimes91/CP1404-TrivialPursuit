@@ -1,5 +1,5 @@
 from Question import Question
-from random import choice
+from game import Game
 
 
 def main():
@@ -14,7 +14,10 @@ def main():
               )
         user_choice = input(">>> ").upper()
         if user_choice == "P":
-            play_game(questions)
+            game = Game(questions, ["The Dark Arts", "Magical People", "Magical Objects", "Hogwarts",
+                                    "Animals & Magical Creatures",
+                                    "Magical Spells & Potions"])
+            game.play_game()
         elif user_choice == "A":
             add_question(questions)
             pass
@@ -54,28 +57,16 @@ def add_question(questions):
         user_category = input(">>> ")
     new_question.append(user_category)
 
-    questions.append(new_question)
+    question = Question(new_question[0], new_question[1], new_question[2], new_question[3], new_question[4])
+    questions.append(question)
 
 
 def save_questions(questions):
     question_file = open("Questions", mode="w")
     for question in questions:
-        question_line = ",".join(question)
+        question_line = ",".join(question.save_to_list())
         question_file.write(question_line + "\n")
     question_file.close()
-
-
-def play_game(questions):
-    points = 0
-    while points < 10:
-        category = get_random_category()
-        question = get_question(category, questions)
-        question.ask_question()
-        
-        # shuffled_options = get_shuffled_options(question)
-        # user_answer = ask_question(question, shuffled_options)
-        # points += is_correct_answer(question[1], user_answer)
-
 
 
 def load_questions():
@@ -87,23 +78,6 @@ def load_questions():
     question_file.close()
 
     return questions
-
-
-def get_random_category():
-    categories = ["The Dark Arts", "Magical People", "Magical Objects", "Hogwarts", "Animals & Magical Creatures",
-                  "Magical Spells & Potions"]
-    chosen_cetegory = choice(categories)
-    return chosen_cetegory
-
-
-# Function get_question(category, questions):
-def get_question(category, questions):
-    category_questions = []
-    for question in questions:
-        if category == question.category:
-            category_questions.append(question)
-    chosen_question = choice(category_questions)
-    return chosen_question
 
 
 main()
