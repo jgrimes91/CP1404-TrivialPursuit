@@ -1,5 +1,13 @@
 from Question import Question
 from game import Game
+from kivy.app import App
+from kivy.lang import Builder
+
+class TrivialPursuitApp(App):
+    def build(self):
+        self.title = "Harry Potter Trivial Pursuit"
+        self.root = Builder.load_file("main.kv")
+
 
 
 def main():
@@ -80,4 +88,4 @@ def load_questions():
     return questions
 
 
-main()
+TrivialPursuitApp().run()
