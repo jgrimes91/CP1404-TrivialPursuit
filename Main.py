@@ -1,40 +1,42 @@
 from Question import Question
 from game import Game
+from random import shuffle
 from kivy.app import App
 from kivy.lang import Builder
+from kivy.app import StringProperty
+
 
 class TrivialPursuitApp(App):
+    question = StringProperty()
+    answer_a = StringProperty()
+    answer_b = StringProperty()
+    answer_c = StringProperty()
+
+
+    def __init__(self):
+        super(TrivialPursuitApp, self).__init__()
+        questions = load_questions()
+        self.game = Game(questions,
+                    ["The Dark Arts", "Magical People", "Magical Objects", "Hogwarts", "Animals & Magical Creatures",
+                     "Magical Spells & Potions"])
+
     def build(self):
         self.title = "Harry Potter Trivial Pursuit"
         self.root = Builder.load_file("main.kv")
 
+    def handle_category_press(self):
+        category = self.game.get_random_category()
+        self.root.ids.category_label.text = "Catgory: {}".format(category)
+        random_question = self.game.get_question(category)
+        self.question = random_question.question
+        options = [random_question.answer, random_question.wrong_answer_1, random_question.wrong_answer_2]
+        shuffle(options)
+        self.answer_a = options[0]
+        self.answer_b = options[1]
+        self.answer_c = options[2]
 
-
-def main():
-    questions = load_questions()
-
-    user_choice = ""
-    while user_choice != "Q":
-        print("P - Play Game",
-              "A - Add Question",
-              "Q - Quit",
-              sep="\n"
-              )
-        user_choice = input(">>> ").upper()
-        if user_choice == "P":
-            game = Game(questions, ["The Dark Arts", "Magical People", "Magical Objects", "Hogwarts",
-                                    "Animals & Magical Creatures",
-                                    "Magical Spells & Potions"])
-            game.play_game()
-        elif user_choice == "A":
-            add_question(questions)
-            pass
-        elif user_choice == "Q":
-            save_questions(questions)
-            print("Farewell wizard")
-        else:
-            print("WRONG MENU CHOICE")
-
+    def handle_answer_press(self, answer_text):
+        pass
 
 def add_question(questions):
     new_question = []

@@ -3,7 +3,7 @@ from random import choice
 
 class Game:
 
-    def __init__(self, category, questions):
+    def __init__(self, questions, category):
         self.get_categories = category
         self.questions = questions
         self.score = 0
@@ -24,11 +24,8 @@ class Game:
         return chosen_category
 
     # Function get_question(category, questions):
-
-    def get_question(self):
+    def get_question(self, category):
         category_questions = []
-        category = self.get_random_category()
-        print(self.questions)
         for question in self.questions:
             if category == question.category:
                 category_questions.append(question)

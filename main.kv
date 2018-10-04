@@ -29,19 +29,32 @@ BoxLayout:
 
         BoxLayout:
             orientation: 'vertical'
+            Button:
+                color: (1, 0, 0.5, 1)
+                text: 'Roll the Category Dice'
+                background_normal: ''
+                background_color: (1, 0, 1, 1)
+                on_press: app.handle_category_press()
             Label:
                 color: (1, 0, 0.5, 1)
-                text: 'What creature is Scabbers?'
+                id: category_label
+                text: "Category: "
+            Label:
+                color: (1, 0, 0.5, 1)
+                text: app.question
             Button:
-                text: 'Owl'
+                text: app.answer_a
+                on_press: app.handle_answer_press(app.answer_1)
                 background_normal: ''
                 background_color: (1, 0, 1, 1)
             Button:
-                text: 'Cat'
+                text: app.answer_b
+                on_press: app.handle_answer_press(app.answer_2)
                 background_normal: ''
                 background_color: (1, 0, 1, 1)
             Button:
-                text: 'Rat'
+                text: app.answer_c
+                on_press: app.handle_answer_press(app.answer_3)
                 background_normal: ''
                 background_color: (1, 0, 1, 1)
             Label:
