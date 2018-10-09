@@ -7,25 +7,31 @@ BoxLayout:
             Label:
                 color: (1, 0, 0.5, 1)
                 text: 'Add A Question'
-            Label:
+            TextInput:
                 color: (1, 0, 0.5, 1)
                 text: 'Question:'
-            Label:
+                id: question
+            TextInput:
                 color: (1, 0, 0.5, 1)
                 text: 'Answer'
-            Label:
+                id: answer
+            TextInput:
                 color: (1, 0, 0.5, 1)
                 text: 'Lie 1'
-            Label:
+                id: lie_1
+            TextInput:
                 color: (1, 0, 0.5, 1)
                 text: 'Lie 2'
-            Label:
+                id: lie_2
+            Spinner:
                 color: (1, 0, 0.5, 1)
-                text: 'Category'
+                values: ("The Dark Arts", "Magical People", "Magical Objects", "Hogwarts", "Animals & Magical Creatures","Magical Spells & Potions")
+                id: category
             Button:
                 text: 'Add'
                 background_normal: ''
                 background_color: (1, 0, 1, 1)
+                on_press: app.add_question(question.text, answer.text, lie_1.text, lie_2.text, category.text)
 
         BoxLayout:
             orientation: 'vertical'
@@ -44,22 +50,22 @@ BoxLayout:
                 text: app.question
             Button:
                 text: app.answer_a
-                on_press: app.handle_answer_press(app.answer_1)
+                on_press: app.handle_answer_press(app.answer_a)
                 background_normal: ''
                 background_color: (1, 0, 1, 1)
             Button:
                 text: app.answer_b
-                on_press: app.handle_answer_press(app.answer_2)
+                on_press: app.handle_answer_press(app.answer_b)
                 background_normal: ''
                 background_color: (1, 0, 1, 1)
             Button:
                 text: app.answer_c
-                on_press: app.handle_answer_press(app.answer_3)
+                on_press: app.handle_answer_press(app.answer_c)
                 background_normal: ''
                 background_color: (1, 0, 1, 1)
             Label:
                 color: (1, 0, 0.5, 1)
-                text: 'Score >9000 score'
+                text: app.score
     Label:
-        text: 'Status'
+        text: app.status
         size_hint_y: 0.33

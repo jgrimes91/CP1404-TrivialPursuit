@@ -7,6 +7,7 @@ class Game:
         self.get_categories = category
         self.questions = questions
         self.score = 0
+        self.current_question = ''
 
     def play_game(self):
         points = 0
